@@ -1,0 +1,27 @@
+# Automatically normalize line endings for all text files
+* text=auto
+
+# Always use LF for Lua source code files
+*.lua text eol=lf
+
+# Documentation
+*.md text eol=lf
+*.txt text eol=lf
+
+# Treat images as binary (no text diffs)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+
+# Treat audio files as binary
+*.wav binary
+*.mp3 binary
+*.ogg binary
+
+# Fonts as binary
+*.ttf binary
+*.otf binary
+
+# Do not attempt diffs for LÖVE packaged games
+*.love binary
