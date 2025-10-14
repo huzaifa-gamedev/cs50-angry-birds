@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# LÖVE2D packaged games
+*.love
+
+# Temporary / Backup
+*.tmp
+*.bak
+*~
+
+# Logs
+*.log
+
+# Lua
+*.luac
