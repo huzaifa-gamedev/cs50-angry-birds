@@ -72,7 +72,6 @@ This repository contains my implementation of the **Angry Birds** project from C
 |-----|---------|
 | **Click + Drag** | Aim and launch Alien |
 | **Spacebar** | Split Alien into 3 (before first collision) |
-| **R** | Restart level |
 | **Escape** | Quit game |
 
 ---
