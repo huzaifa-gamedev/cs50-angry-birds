@@ -1,9 +1,9 @@
 # 🕊️ CS50 — Angry Birds  
 
-[![LÖVE2D](https://img.shields.io/badge/Engine-L%C3%96VE2D-informational)](https://love2d.org/)  
-[![Language](https://img.shields.io/badge/Language-Lua-blue)](https://www.lua.org/)  
-[![Course](https://img.shields.io/badge/Course-CS50G-red)](https://cs50.harvard.edu/games/)  
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)  
+[![LÖVE2D](https://img.shields.io/badge/Engine-L%C3%96VE2D-informational)](https://love2d.org/)
+[![Language](https://img.shields.io/badge/Language-Lua-blue)](https://www.lua.org/)
+[![Course](https://img.shields.io/badge/Course-CS50G-red)](https://cs50.harvard.edu/games/)
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
 
 **Course:** [CS50's Introduction to Game Development](https://cs50.harvard.edu/games/)  
 **Assignment:** Angry Birds — “Three’s Company”  
@@ -23,19 +23,19 @@ This repository contains my implementation of the **Angry Birds** project from C
 
 ### What I Implemented  
 
-- ✔️ **Alien Splitting Mechanic** —  
+- ✔️ **Alien Splitting Mechanic**  
   - After launching an Alien, pressing **Spacebar** (before it collides with anything) splits it into **three Aliens**.  
   - The **center Alien** continues its original trajectory.  
   - The **upper and lower Aliens** are spawned with slightly altered **linear velocities** and angles for realistic divergence.  
 
-- ✔️ **Collision Flag & Split Condition** —  
+- ✔️ **Collision Flag & Split Condition**  
   - Added a **collision flag** in `Level.lua` to ensure splitting only occurs **before the first impact**.  
   - Once any Alien collides with an object, the flag is disabled, preventing multiple splits.  
 
-- ✔️ **Launch Marker Behavior Update** —  
+- ✔️ **Launch Marker Behavior Update**  
   - Updated `AlienLaunchMarker.lua` so the **launch marker resets only when all Aliens** (split or original) **have nearly stopped moving**, ensuring consistent physics handling.  
 
-- ✔️ **Physics Integration** —  
+- ✔️ **Physics Integration**  
   - Leveraged **Box2D’s linear velocity vectors** to calculate accurate splitting trajectories.  
   - Maintained realistic motion, gravity, and collision effects for all three Aliens.  
 
@@ -50,7 +50,9 @@ This repository contains my implementation of the **Angry Birds** project from C
 ## 🚀 How to Run  
 
 1. **Install LÖVE2D:**  
+   ```bash
    Download and install from [https://love2d.org/](https://love2d.org/).  
+   ```
 
 2. **Clone this repository:**  
    ```bash
