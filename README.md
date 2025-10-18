@@ -50,9 +50,8 @@ This repository contains my implementation of the **Angry Birds** project from C
 ## 🚀 How to Run  
 
 1. **Install LÖVE2D:**  
-   ```bash
    Download and install from [https://love2d.org/](https://love2d.org/).  
-   ```
+
 
 2. **Clone this repository:**  
    ```bash
