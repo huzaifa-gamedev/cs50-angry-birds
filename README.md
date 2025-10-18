@@ -1,37 +1,43 @@
-# 🗡️ CS50 — Legend of Zelda  
+# 🕊️ CS50 — Angry Birds  
 
-[![LÖVE2D](https://img.shields.io/badge/Engine-L%C3%96VE2D-informational)](https://love2d.org/)
-[![Language](https://img.shields.io/badge/Language-Lua-blue)](https://www.lua.org/)
-[![Course](https://img.shields.io/badge/Course-CS50G-red)](https://cs50.harvard.edu/games/)
-[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![LÖVE2D](https://img.shields.io/badge/Engine-L%C3%96VE2D-informational)](https://love2d.org/)  
+[![Language](https://img.shields.io/badge/Language-Lua-blue)](https://www.lua.org/)  
+[![Course](https://img.shields.io/badge/Course-CS50G-red)](https://cs50.harvard.edu/games/)  
+[![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)  
 
 **Course:** [CS50's Introduction to Game Development](https://cs50.harvard.edu/games/)  
-**Assignment:** Legend of Zelda  
+**Assignment:** Angry Birds — “Three’s Company”  
 **Engine / Language:** LÖVE2D (Lua)  
 
 ---
 
 ## 📋 Project Overview  
 
-This repository contains my implementation of the **Legend of Zelda** assignment from CS50's Introduction to Game Development.  
+This repository contains my implementation of the **Angry Birds** project from CS50’s *Introduction to Game Development*.  
 
-🕹️ Inspired by the NES classic, this project enhances the dungeon-crawling adventure with **hearts, pots, and throwable weapons**, expanding gameplay depth and survival mechanics.  
+🐥 Built with **LÖVE2D** and **Box2D**, this physics-based projectile game replicates the classic **Angry Birds** experience where players launch Aliens to destroy obstacles and enemies.  
 
-📺 You can also watch my gameplay demo on [YouTube](https://youtu.be/2jVrMHtXrbk?si=89M16LnBJWaZZ5Mi).
+💡 In this version, I implemented the **“Three’s Company”** feature — giving players the ability to **split a launched Alien into three** mid-flight for more strategic gameplay.  
 
 ---
 
 ### What I Implemented  
 
-- ✔️ **Heart Drops** — Enemies sometimes drop **hearts** on defeat. Picking one up restores **a full heart** without exceeding the health cap.  
-- ✔️ **Pot Objects** — Randomly spawned **pots** in the dungeon that the player can:  
-  - Pick up (changes animation to carrying state).  
-  - Cannot swing a sword while carrying.  
-- ✔️ **Pot Throwing Mechanic** — While carrying:  
-  - Player can **throw the pot** in the direction they face.  
-  - Pot travels up to **4 tiles** or until it collides with a wall or enemy.  
-  - On hitting an enemy → deals **1 damage** and disappears.  
-  - On hitting a wall → disappears.  
+- ✔️ **Alien Splitting Mechanic** —  
+  - After launching an Alien, pressing **Spacebar** (before it collides with anything) splits it into **three Aliens**.  
+  - The **center Alien** continues its original trajectory.  
+  - The **upper and lower Aliens** are spawned with slightly altered **linear velocities** and angles for realistic divergence.  
+
+- ✔️ **Collision Flag & Split Condition** —  
+  - Added a **collision flag** in `Level.lua` to ensure splitting only occurs **before the first impact**.  
+  - Once any Alien collides with an object, the flag is disabled, preventing multiple splits.  
+
+- ✔️ **Launch Marker Behavior Update** —  
+  - Updated `AlienLaunchMarker.lua` so the **launch marker resets only when all Aliens** (split or original) **have nearly stopped moving**, ensuring consistent physics handling.  
+
+- ✔️ **Physics Integration** —  
+  - Leveraged **Box2D’s linear velocity vectors** to calculate accurate splitting trajectories.  
+  - Maintained realistic motion, gravity, and collision effects for all three Aliens.  
 
 ---
 
@@ -43,17 +49,16 @@ This repository contains my implementation of the **Legend of Zelda** assignment
 
 ## 🚀 How to Run  
 
-1. Install [LÖVE2D](https://love2d.org/).  
+1. **Install LÖVE2D:**  
+   Download and install from [https://love2d.org/](https://love2d.org/).  
 
-2. Download and unzip the CS50 Zelda distro or clone this repository:  
-
+2. **Clone this repository:**  
    ```bash
-   git clone https://github.com/huzaifa-gamedev/cs50-legend-of-zelda.git
-   cd cs50-legend-of-zelda
+   git clone https://github.com/huzaifa-gamedev/cs50-angry-birds.git
+   cd cs50-angry-birds
    ```  
 
-3. Run the game:  
-
+3. **Run the Game:**  
    ```bash
    love .
    ```  
@@ -62,21 +67,31 @@ This repository contains my implementation of the **Legend of Zelda** assignment
 
 ## 🎯 Controls  
 
-- **Arrow Keys (↑ ↓ ← →)** — Move Link.  
-- **Spacebar** — Swing sword (if not carrying a pot).  
-- **Enter/Return** — Pick up pot (when facing one).  
-- **Enter/Return (while carrying)** — Throw pot.  
-- **Escape** — Quit game.  
+| Key | Action |
+|-----|---------|
+| **Click + Drag** | Aim and launch Alien |
+| **Spacebar** | Split Alien into 3 (before first collision) |
+| **R** | Restart level |
+| **Escape** | Quit game |
 
 ---
 
 ## 🧠 Notes on Implementation  
 
-- **Hearts:** Implemented as `GameObject` with `onConsume` callback. Added healing logic with cap at 6 health (3 hearts).  
-- **Pot Pickup:** Added **PlayerCarryingPotState** that locks sword usage and updates animations.  
-- **Pot Throwing:** Extended `GameObject` with **projectile behavior** using `dx`, `dy`, and max distance logic.  
-- **Collision Handling:** Pots interact with **walls** and **enemies**, disappearing or damaging appropriately.  
-- **Integration:** Modified `Dungeon`, `Player`, and `GameObject` classes to support new mechanics smoothly.  
+- **Splitting Logic:**  
+  Implemented directly in the `Level` class, triggered via `love.keypressed('space')`. Ensures splitting happens only if the **active Alien** has been launched and **has not collided**.  
+
+- **Spawn Offsets:**  
+  Created two new Aliens slightly above and below the original Alien’s position using **Box2D world coordinates** and adjusted **linear velocities** for natural spread.  
+
+- **Collision Detection:**  
+  Used `World:setCallbacks()` to detect when the **Player Alien** hits any object, setting a `hasCollided` flag to prevent further splits.  
+
+- **Game Reset Condition:**  
+  Modified the **launch reset** behavior so the marker reappears only when **all three Aliens** come to rest (near-zero velocity).  
+
+- **Physics Consistency:**  
+  Ensured each new Alien inherits the same **fixture, shape, density, and restitution** as the base Alien for consistent simulation results.  
 
 ---
 
@@ -103,7 +118,7 @@ For more details, see [ATTRIBUTION.md](ATTRIBUTION.md).
 
 ## 📬 Contact  
 
-For ideas, feedback, or collaboration, feel free to reach out via [GitHub](https://github.com/huzaifakarim1).  
+For feedback, collaboration, or project ideas, feel free to connect via [GitHub](https://github.com/huzaifakarim1).  
 
 ---
 
